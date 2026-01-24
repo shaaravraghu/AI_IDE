@@ -1,0 +1,331 @@
+/* ============= CSS Variables for Theming ============= */
+:root {
+    --card-bg: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --border-color: #ddd;
+    --input-focus: #667eea;
+}
+
+:root.dark-theme {
+    --card-bg: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --border-color: #404040;
+    --input-focus: #667eea;
+}
+
+/* ============= Global Styles ============= */
+/* Reset all default margins, padding, and set border-box model */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ============= Body & Background ============= */
+/* Main background gradient and full-height centered layout */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #121521 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+/* ============= Container ============= */
+/* Maximum width constraint for login card */
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* ============= Card Styling ============= */
+/* White box containing login form */
+.card {
+    background: var(--card-bg);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    transition: background 0.3s;
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* ============= Header ============= */
+/* Logo title with gradient text */
+
+/* Subtitle and description text */
+p { color: var(--text-secondary); margin-bottom: 20px; font-size: 14px; animation: fadeIn 1s ease-out 0.3s both; }
+/* ============= Form Styling ============= */
+/* Form layout - vertical stack */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Form label styling */
+label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    animation: fadeIn 1s ease-out 0.4s both;
+}
+
+/* ============= Error Message ============= */
+/* Error text styling */
+.error { color: #ff6b6b; font-size: 12px; }
+
+/* ============= Theme Toggle ============= */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: rotate(20deg);
+}
+/* ============= ANIMATIONS ============= */
+
+/* Logo Container Animation */
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+/* Animated Logo */
+.logo-animated {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    animation: bounce 2s infinite, glow 2s infinite;
+    position: relative;
+}
+
+.logo-animated::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #667eea;
+    animation: pulse 2s infinite;
+    opacity: 0.5;
+}
+
+.logo-char {
+    display: inline-block;
+    animation: rotate 3s linear infinite;
+}
+
+/* Updated H1 Styling */
+h1 {
+    font-size: 28px;
+    color: var(--text-primary);
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    animation: fadeIn 1s ease-out 0.2s both;
+}
+
+/* Form animations */
+input[type="email"],
+input[type="password"] {
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    transition: all 0.3s;
+    animation: slideInLeft 0.6s ease-out backwards;
+}
+
+input[type="email"] {
+    animation-delay: 0.3s;
+}
+
+input[type="password"] {
+    animation-delay: 0.4s;
+}
+
+/* Input animations */
+input:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 12px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Button animation */
+button {
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    animation: slideInUp 0.6s ease-out 0.5s both;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.3s ease;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+/* Link animation */
+a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #667eea;
+    bottom: -2px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+a:hover {
+    color: #764ba2;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* ============= KEYFRAME ANIMATIONS ============= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(102, 126, 234, 0.6);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
