@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Dev Workspace Prototype</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar">
+        <div class="brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            AI code reviewer
+        </div>
+        
+        <!-- Direct onclick ensures it works even if other JS fails -->
+        <div class="nav-item active" id="nav-dev" onclick="showPage('developer', this)">
+            <span>💻</span> Developer
+        </div>
+        <div class="nav-item" id="nav-agent" onclick="showPage('agent', this)">
+            <span>🤖</span> Agent
+        </div>
+        <div class="nav-item" id="nav-status" onclick="showPage('status', this)">
+            <span>📊</span> Status
+        </div>
+        <div class="nav-item" id="nav-testing" onclick="showPage('testing', this)">
+            <span>🧪</span> Testing
+        </div>
+        <div class="nav-item" id="nav-planning" onclick="showPage('planning', this)">
+            <span>📝</span> Planning
+        </div>
+
+        <div class="sidebar-footer">
+            <button class="footer-btn" onclick="openSettings()">
+                <span>⚙️</span> Settings
+            </button>
+            <button class="footer-btn logout-btn" onclick="handleLogout()">
+                <span>🚪</span> Logout
+            </button>
+        </div>
+    </nav>     
+
+    <!-- Main Content Area -->
+    <main id="main-content">
+        <header>
+            <div class="page-title" id="page-header">Developer Module</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Welcome, Developer</div>
+        </header>
+
+        <!-- 
+           SECTIONS (PAGES) 
+           Each section corresponds to a module from the screenshots 
+        -->
+
+        <!-- PAGE 1: DEVELOPER -->
+        <section id="developer" class="view-container active">
+            <div class="grid-2 dev-layout">
+                <!-- File Explorer -->
+                <div class="panel">
+                    <div class="panel-header">Files & Folders</div>
+                    <div class="panel-body file-tree">
+                        <div class="folder">📂 src</div>
+                        <div class="file-item" onclick="loadFile('App.js')">├─ App.js</div>
+                        <div class="file-item" onclick="loadFile('Index.js')">├─ Index.js</div>
+                        <div class="file-item" onclick="loadFile('Utils.js')">├─ Utils.js</div>
+                        <div class="folder" style="margin-top:10px;">📂 components</div>
+                        <div class="file-item" onclick="loadFile('Button.js')">├─ Button.js</div>
+                        <div class="file-item" onclick="loadFile('Modal.js')">├─ Modal.js</div>
+                    </div>
+                </div>
+
+                <!-- Code Display -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <span>Code Display Window</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">JavaScript</div>
+                    </div>
+                    <div class="panel-body code-wrapper">
+                        <div class="code-editor" id="code-display">
+                            <!-- Code injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: AGENT -->
+        <section id="agent" class="view-container">
+            <div class="grid-2">
+                <!-- New Project / Parameters -->
+                <div class="panel">
+                    <div class="panel-header">New Project</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>Project Name</label>
+                            <input type="text" class="form-input" placeholder="e.g. AI Dashboard">
+                        </div>
+                        <div class="form-group">
+                            <label>Framework</label>
+                            <select class="form-select">
+                                <option>React</option>
+                                <option>Vue</option>
+                                <option>Angular</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Complexity Level</label>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn level-btn" data-level="Low">Low</button>
+                                <button class="btn level-btn active" data-level="Medium">Medium</button>
+                                <button class="btn level-btn" data-level="High">High</button>
+                            </div>
+                        </div>
+                        <button class="btn full-width" id="init-agent-btn">Initialize Agent</button>
+                    </div>
+                </div>
+
+                <!-- Transcriptions / Logs -->
+                <div class="panel">
+                    <div class="panel-header">Transcriptions & Logs</div>
+                    <div class="panel-body log-container">
+                        <ul class="log-list" id="agent-logs">
+                            <!-- Logs injected via JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: STATUS -->
+        <section id="status" class="view-container">
+            <div class="grid-2">
+                <!-- Timeline -->
+                <div class="panel">
+                    <div class="panel-header">Project Timeline</div>
+                    <div class="panel-body">
+                        <div class="timeline" id="timeline-container">
+                            <!-- Timeline items injected via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commit History -->
+                <div class="panel">
+                    <div class="panel-header">Commit History</div>
+                    <div class="panel-body">
+                        <table class="commit-table">
+                            <thead>
+                                <tr>
+                                    <th>Hash</th>
+                                    <th>Message</th>
+                                    <th>Author</th>
+                                </tr>
+                            </thead>
+                            <tbody id="commit-history-body">
+                                <!-- Commits injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: TESTING -->
+        <section id="testing" class="view-container">
+            <div class="grid-2">
+                <!-- Visualization -->
+                <div class="panel">
+                    <div class="panel-header">Visualization</div>
+                    <div class="panel-body">
+                        <div class="viz-container">
+                            <div class="bar-chart">
+                                <div class="bar" style="height: 40%" title="Unit Tests"></div>
+                                <div class="bar" style="height: 70%" title="Integration"></div>
+                                <div class="bar" style="height: 50%" title="E2E"></div>
+                                <div class="bar" style="height: 90%" title="Performance"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <h4>Metric Controls</h4>
+                            <br>
+                            <div class="metric-slider">
+                                <div class="metric-header">
+                                    <span>Efficiency Metric</span>
+                                    <span id="eff-val">75%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="75" id="efficiency-range">
+                            </div>
+                            <div class="metric-slider">
+                                <div class="metric-header">
+                                    <span>Scalability Metric</span>
+                                    <span id="scal-val">50%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="50" id="scalability-range">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="panel">
+                    <div class="panel-header">Test Actions</div>
+                    <div class="panel-body">
+                        <div class="test-case-list">
+                            <button class="action-btn" onclick="showToast('Generating Test Cases...')">Generate Test Cases</button>
+                            <button class="action-btn" onclick="showToast('Explaining Code Logic...')">Code Explanation</button>
+                            <button class="action-btn" onclick="showToast('Running Coverage Analysis...')">Run Coverage</button>
+                        </div>
+                        <div class="console-output" id="test-console">
+                            > System ready.<br>
+                            > Waiting for input...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: PLANNING -->
+        <section id="planning" class="view-container">
+            <div class="panel full-height">
+                <div class="panel-header">
+                    <span>Whiteboard</span>
+                    <div>
+                        <button class="wb-btn" onclick="showToast('Project Shared!')">Share</button>
+                        <button class="wb-btn" onclick="showToast('Diagram Exported as PNG')">Export</button>
+                    </div>
+                </div>
+                
+                <div class="panel-body" style="padding: 0; position: relative; overflow: hidden; background-color: #f8fafc;">
+                    
+                    <!-- Toolbar (Left) -->
+                    <div class="wb-toolbar left-tools">
+                        <div class="tool-title">Tools</div>
+                        <button class="wb-btn" title="Select">👆</button>
+                        <button class="wb-btn" title="Rectangle">⬜</button>
+                        <button class="wb-btn" title="Text">T</button>
+                        <button class="wb-btn" title="Line">📏</button>
+                    </div>
+
+                    <!-- Navigation / Zoom (Bottom) -->
+                    <div class="wb-nav-controls">
+                        <button class="wb-btn" onclick="zoomBoard(0.9)">-</button>
+                        <span class="zoom-level">100%</span>
+                        <button class="wb-btn" onclick="zoomBoard(1.1)">+</button>
+                        <div style="width: 1px; background: #ccc; margin: 0 5px;"></div>
+                        <button class="wb-btn" onclick="centerBoard()">Center</button>
+                    </div>
+
+                    <!-- The Canvas -->
+                    <div id="whiteboard">
+                        <!-- SVG Layer for Lines (Connectors) -->
+                        <svg id="connections-layer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1;">
+                            <!-- Line: User Flow -> API Design -->
+                            <path d="M 320 250 L 480 250" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+                            <!-- Line: API Design -> Database Schema -->
+                            <path d="M 720 250 L 880 250" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+                            
+                            <!-- Arrow Marker Definition -->
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+                                </marker>
+                            </defs>
+                        </svg>
+
+                        <!-- Boxes (Nodes) -->
+                        
+                        <!-- 1. User Flow (Blue) -->
+                        <div class="flow-node node-blue" style="top: 200px; left: 100px;">
+                            <div class="node-header">
+                                <div class="node-indicator" style="background: #3b82f6;"></div>
+                                User Flow
+                            </div>
+                            <div class="node-body">
+                                1. Login<br>
+                                2. Dashboard<br>
+                                3. Settings
+                            </div>
+                        </div>
+
+                        <!-- 2. API Design (Green) -->
+                        <div class="flow-node node-green" style="top: 200px; left: 500px;">
+                            <div class="node-header">
+                                <div class="node-indicator" style="background: #10b981;"></div>
+                                API Design
+                            </div>
+                            <div class="node-body">
+                                GET /users<br>
+                                POST /login<br>
+                                PUT /update
+                            </div>
+                        </div>
+
+                        <!-- 3. Database Schema (Brown/Orange) -->
+                        <div class="flow-node node-brown" style="top: 200px; left: 900px;">
+                            <div class="node-header">
+                                <div class="node-indicator" style="background: #d97706;"></div>
+                                Database Schema
+                            </div>
+                            <div class="node-body">
+                                Table: Users<br>
+                                ID, Name, Email<br>
+                                Table: Logs
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- Toast Notification -->
+    <div id="toast">Action Successful</div>
+
+    <!-- ... content ... -->
+    
+    <!-- 1. Load Data First -->
+    <script src="js/data.js"></script>
+    <!-- 2. Load Whiteboard Logic -->
+    <script src="js/whiteboard.js"></script>
+    <!-- 3. Load Main App Logic -->
+    <script src="js/app.js"></script>
+</body>
+</html>
