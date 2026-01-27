@@ -26,18 +26,20 @@ This repository contains the backend for an **AI-Driven Code Reviewer** built wi
 ## Installation
 
 1. **Clone the repository**
-2. 
 git clone https://github.com/Pradeeshph23/ai-code-reviewer-backend.git
 cd ai-code-reviewer-backend
-Create a virtual environment
+
+2.Create a virtual environment
 
 python -m venv venv
 source venv/bin/activate    # Linux/macOS
 venv\Scripts\activate       # Windows
-Install dependencies
+
+3.Install dependencies
 
 
 pip install fastapi uvicorn pydantic
+
 Running the Backend
 Start the FastAPI server:
 
